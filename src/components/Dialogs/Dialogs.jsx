@@ -21,18 +21,14 @@ const Dialogs = props => {
   return (
     <div className={classes.dialogs}>
       <div className={classes.dialogsItems}>
-        <DialogButton id="1" name="Valera" />
-        <DialogButton id="2" name="Andrey" />
-        <DialogButton id="3" name="Ann" />
-        <DialogButton id="4" name="Artem" />
+        {dialogsData.map(item => (
+          <DialogButton id={item.id} name={item.name} />
+        ))}
       </div>
       <div className={classes.messages}>
-      {messageData.map(item=>{
-        return <Message messageText={item.message} />
-      })}
-        {/* <Message messageText="Message 1" />
-        <Message messageText="Message 2" />
-        <Message messageText="Message 3" /> */}
+        {messageData.map(item => (
+          <Message messageText={item.message} />
+        ))}
       </div>
     </div>
   );
