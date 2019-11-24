@@ -1,6 +1,6 @@
-import React from 'react';
-import classes from './ProfileInfo.module.css';
-import Profile from '../Profile';
+import React from "react";
+import classes from "./ProfileInfo.module.css";
+import Profile from "../Profile";
 
 const ProfileInfo = props => {
   return (
