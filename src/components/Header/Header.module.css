@@ -1,6 +1,7 @@
 .header {
   grid-area: h;
   background-color: lightgreen;
+  display: flex;
 }
 
 .header img {

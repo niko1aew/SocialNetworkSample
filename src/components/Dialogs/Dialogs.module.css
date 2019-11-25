@@ -2,3 +2,12 @@
   display: grid;
   grid-template-columns: 2fr 10fr;
 }
+.messages {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+}
+
+.messages .answer {
+  align-self: flex-end;
+}

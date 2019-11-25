@@ -27,11 +27,16 @@ let state = {
       { id: "5", name: "Artem" }
     ],
     messages: [
-      { id: "1", message: "Message 1" },
-      { id: "2", message: "Message 2" },
-      { id: "3", message: "Message 3" },
-      { id: "4", message: "Message 4" },
-      { id: "5", message: "Message 5" }
+      {
+        id: "1",
+        message:
+          "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.",
+        isAnswer: false
+      },
+      { id: "2", message: "Message 2", isAnswer: true },
+      { id: "3", message: "Message 3", isAnswer: true },
+      { id: "4", message: "Message 4", isAnswer: false },
+      { id: "5", message: "Message 5", isAnswer: true }
     ]
   }
 };
