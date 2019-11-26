@@ -1,4 +1,3 @@
-import { renderViewTree } from './../render';
 let state = {
   profilePage: {
     newPostText: '',
@@ -44,6 +43,8 @@ let state = {
   }
 };
 
+let renderEntireTree;
+
 export let addMessage = () => {
   if (
     state.dialogsPage.newMsgText &&
@@ -55,12 +56,11 @@ export let addMessage = () => {
       isAnswer: true
     });
     state.dialogsPage.newMsgText = '';
-    renderViewTree(state);
+    renderEntireTree(state);
   }
 };
 
 export let addPost = () => {
-  
   if (
     state.profilePage.newPostText &&
     state.profilePage.newPostText.trim() !== ''
@@ -71,20 +71,23 @@ export let addPost = () => {
       likesCount: 0
     });
     state.profilePage.newPostText = '';
-    
-    renderViewTree(state);
+
+    renderEntireTree(state);
   }
-  
 };
 
 export let setMsgText = text => {
   state.dialogsPage.newMsgText = text;
-  renderViewTree(state);
+  renderEntireTree(state);
 };
 
 export let setPostText = text => {
   state.profilePage.newPostText = text;
-  renderViewTree(state);
+  renderEntireTree(state);
+};
+
+export const subscribe = observer => {
+  renderEntireTree = observer;
 };
 
 export default state;
