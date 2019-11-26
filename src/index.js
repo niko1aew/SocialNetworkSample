@@ -1,30 +1,24 @@
 import * as serviceWorker from './serviceWorker';
-import state, {
-  subscribe,
-  addMessage,
-  setMsgText,
-  addPost,
-  setPostText
-} from './Redux/state';
+import store from './Redux/store';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 
-let renderEntireTree = state => {
+let renderEntireTree = store => {
   ReactDOM.render(
     <App
-      state={state}
-      addMessageCallback={addMessage}
-      msgTextChangeCallback={setMsgText}
-      addPost={addPost}
-      setPostText={setPostText}
+      state={store.state}
+      addMessageCallback={store.addMessage}
+      msgTextChangeCallback={store.setMsgText}
+      addPost={store.addPost}
+      setPostText={store.setPostText}
     />,
     document.getElementById('root')
   );
 };
 
-renderEntireTree(state);
+renderEntireTree(store);
 
-subscribe(renderEntireTree);
+store.subscribe(renderEntireTree);
 
 serviceWorker.unregister();

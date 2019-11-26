@@ -4,12 +4,12 @@ import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
 const Profile = props => {
   let newPost = () => {
-    props.addPost();
+    props.store.addPost();
   };
 
   let postTextAreaChange = event => {
     let text = event.target.value;
-    props.setPostText(text);
+    props.store.setPostText(text);
   };
 
   return (
@@ -21,14 +21,14 @@ const Profile = props => {
       <div>
         <textarea
           preventDefault={true}
-          value={props.profilePage.newPostText}
+          value={props.store.state.profilePage.newPostText}
           onChange={postTextAreaChange}
         ></textarea>
       </div>
       <button>
         <button onClick={newPost}>New post</button>
       </button>
-      <MyPosts posts={props.profilePage.posts} />
+      <MyPosts posts={props.store.state.profilePage.posts} />
     </button>
   );
 };
