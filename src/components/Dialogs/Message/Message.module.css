@@ -9,6 +9,7 @@
 }
 
 .answer {
-    align-self: flex-end;
+    /* align-self: flex-end; */
+    margin-left: 100px;
 
 }

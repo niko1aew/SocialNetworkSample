@@ -15,7 +15,7 @@ function App(props) {
         <Navbar></Navbar>
         <div className="app-wrapper-content">
           <Route
-            render={() => <Dialogs state={props.state.dialogsPage} />}
+            render={() => <Dialogs state={props.state.dialogsPage} addMessageCallback={props.addMessageCallback}/>}
             path="/dialogs"
           />
           <Route

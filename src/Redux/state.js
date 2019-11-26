@@ -1,3 +1,4 @@
+import { renderViewTree } from "./../render";
 let state = {
   profilePage: {
     posts: [
@@ -40,4 +41,16 @@ let state = {
     ]
   }
 };
+
+export let addMessage = text => {
+  state.dialogsPage.messages.push({ id: "30", message: text, isAnswer: true });
+  renderViewTree(state);
+};
+
+let msgText = "";
+
+export let setMsgText=(text)=>{
+  
+}
+
 export default state;

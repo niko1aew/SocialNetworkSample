@@ -1,13 +1,37 @@
 .dialogs {
   display: grid;
-  grid-template-columns: 2fr 10fr;
+  /* grid-template-columns: 2fr 10fr; */
+  grid-template-columns: 130px auto;
+  /* grid-template-columns: repeat(auto-fill, minmax(130px, 2fr)); */
+  /* grid-template-columns: 7ch auto; */
+  grid-template-rows: 10fr 2fr;
+}
+
+.dialogs > * {
+  border: 2px solid rgb(214,232,182);
 }
 .messages {
   display: flex;
   flex-direction: column;
-  max-width: 300px;
+  /* max-width: 300px; */
 }
 
-.messages .answer {
-  align-self: flex-end;
+.txtArea {
+  background-color: beige;
+}
+
+.btnAddPost{
+  margin-top:3px;
+  border-radius: 5px;
+  background: lightblue;
+  /* box-shadow: none; */
+  border: 1;
+}
+
+.msgInput {
+  padding: 3px;
+  max-width: 300px;
+  grid-column: 2;
+  display: flex;
+  flex-direction: column;
 }
