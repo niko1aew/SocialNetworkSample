@@ -7,7 +7,6 @@ import { Route, BrowserRouter } from "react-router-dom";
 import "./App.css";
 
 function App(props) {
-  debugger;
   return (
     <BrowserRouter>
       <div className="app-wrapper">
@@ -15,11 +14,11 @@ function App(props) {
         <Navbar></Navbar>
         <div className="app-wrapper-content">
           <Route
-            render={() => <Dialogs state={props.state.dialogsPage} addMessageCallback={props.addMessageCallback}/>}
+            render={() => <Dialogs dialogsPage={props.state.dialogsPage} addMessageCallback={props.addMessageCallback} msgTextChangeCallback={props.msgTextChangeCallback}/>}
             path="/dialogs"
           />
           <Route
-            render={() => <Profile state={props.state.profilePage} />}
+            render={() => <Profile profilePage={props.state.profilePage} addPost={props.addPost} setPostText={props.setPostText}/>}
             path="/profile"
           />
         </div>
