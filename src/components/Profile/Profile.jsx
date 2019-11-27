@@ -21,14 +21,14 @@ const Profile = props => {
       <div>
         <textarea
           preventDefault={true}
-          value={props.store.state.profilePage.newPostText}
+          value={props.store.getState().profilePage.newPostText}
           onChange={postTextAreaChange}
         ></textarea>
       </div>
       <button>
         <button onClick={newPost}>New post</button>
       </button>
-      <MyPosts posts={props.store.state.profilePage.posts} />
+      <MyPosts posts={props.store.getState().profilePage.posts} />
     </button>
   );
 };

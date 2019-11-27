@@ -3,7 +3,7 @@ import classes from './Dialogs.module.css';
 import DialogButton from './DialogButton/DialogButton';
 import Message from './Message/Message';
 const Dialogs = props => {
-  let dialogButtons = props.store.state.dialogsPage.dialogs.map(item => (
+  let dialogButtons = props.store.getState().dialogsPage.dialogs.map(item => (
     <DialogButton
       id={item.id}
       name={item.name}
@@ -11,7 +11,7 @@ const Dialogs = props => {
     />
   ));
 
-  let messages = props.store.state.dialogsPage.messages.map(item => (
+  let messages = props.store.getState().dialogsPage.messages.map(item => (
     <Message messageText={item.message} isAnswer={item.isAnswer} />
   ));
 
@@ -37,7 +37,7 @@ const Dialogs = props => {
         <textarea
           preventDefault={true}
           className={classes.txtArea}
-          value={props.store.state.dialogsPage.newMsgText}
+          value={props.store.getState().dialogsPage.newMsgText}
           onChange={msgInputChange}
           onKeyDown={msgInputEnterSubmit}
         ></textarea>
