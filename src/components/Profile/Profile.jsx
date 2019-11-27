@@ -2,7 +2,7 @@ import React from 'react';
 import classes from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
-import {addNewPostActionCreator,setNewPostTextActionCreator} from './../../Redux/store'
+import {addNewPostActionCreator,setNewPostTextActionCreator} from './../../Redux/Reducers/profileReducer'
 const Profile = props => {
   let newPost = () => {
     props.dispatch(addNewPostActionCreator());

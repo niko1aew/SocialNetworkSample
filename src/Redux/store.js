@@ -1,9 +1,5 @@
-const ACTION_TYPES = {
-  ADD_NEW_POST: 'ADD-NEW-POST',
-  ADD_NEW_MESSAGE: 'ADD-NEW-MESSAGE',
-  SET_NEW_MESSAGE_TEXT: 'SET-NEW-MESSAGE-TEXT',
-  SET_NEW_POST_TEXT: 'SET-NEW-POST-TEXT'
-};
+import profileReducer from './Reducers/profileReducer';
+import dialogsReducer from './Reducers/dialogsReducer';
 
 let store = {
   _subscriber(store) {
@@ -60,57 +56,11 @@ let store = {
     this._subscriber = observer;
   },
   dispatch(action) {
-    debugger;
-    if (action.type === ACTION_TYPES.ADD_NEW_POST) {
-      if (
-        this._state.profilePage.newPostText &&
-        this._state.profilePage.newPostText.trim() !== ''
-      ) {
-        this._state.profilePage.posts.push({
-          id: '30',
-          text: this._state.profilePage.newPostText,
-          likesCount: 0
-        });
-        this._state.profilePage.newPostText = '';
-
-        this._subscriber(this._state);
-      }
-    } else if (action.type === ACTION_TYPES.ADD_NEW_MESSAGE) {
-      if (
-        this._state.dialogsPage.newMsgText &&
-        this._state.dialogsPage.newMsgText.trim() !== ''
-      ) {
-        this._state.dialogsPage.messages.push({
-          id: '30',
-          message: this._state.dialogsPage.newMsgText,
-          isAnswer: true
-        });
-        this._state.dialogsPage.newMsgText = '';
-        this._subscriber(this._state);
-      }
-    } else if (action.type === ACTION_TYPES.SET_NEW_MESSAGE_TEXT) {
-      debugger;
-      this._state.dialogsPage.newMsgText = action.text;
-      this._subscriber(this._state);
-    } else if (action.type === ACTION_TYPES.SET_NEW_POST_TEXT) {
-      this._state.profilePage.newPostText = action.text;
-      this._subscriber(this._state);
-    }
+    this._state.dialogsPage = dialogsReducer(this._state.dialogsPage, action);
+    this._state.profilePage = profileReducer(this._state.profilePage, action);
+    this._subscriber(this._state);
   }
 };
-export const addNewPostActionCreator = () => ({
-  type: ACTION_TYPES.ADD_NEW_POST
-});
-export const addNewMessageActionCreator = () => ({
-  type: ACTION_TYPES.ADD_NEW_MESSAGE
-});
-export const setNewMessageTextActionCreator = text => ({
-  type: ACTION_TYPES.SET_NEW_MESSAGE_TEXT,
-  text
-});
-export const setNewPostTextActionCreator = text => ({
-  type: ACTION_TYPES.SET_NEW_POST_TEXT,
-  text
-});
+
 export default store;
 window.store = store;
