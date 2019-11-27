@@ -2,8 +2,10 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogButton from './DialogButton/DialogButton';
 import Message from './Message/Message';
+import {addNewMessageActionCreator,setNewMessageTextActionCreator} from './../../Redux/store'
 const Dialogs = props => {
-  let dialogButtons = props.store.getState().dialogsPage.dialogs.map(item => (
+  debugger;
+  let dialogButtons = props.state.dialogsPage.dialogs.map(item => (
     <DialogButton
       id={item.id}
       name={item.name}
@@ -11,17 +13,17 @@ const Dialogs = props => {
     />
   ));
 
-  let messages = props.store.getState().dialogsPage.messages.map(item => (
+  let messages = props.state.dialogsPage.messages.map(item => (
     <Message messageText={item.message} isAnswer={item.isAnswer} />
   ));
 
   let sendMessage = () => {
-    props.store.addMessage();
+    props.dispatch(addNewMessageActionCreator());
   };
 
   let msgInputChange = event => {
     let inputText = event.target.value;
-    props.store.setMsgText(inputText);
+    props.dispatch(setNewMessageTextActionCreator(inputText));
   };
 
   let msgInputEnterSubmit = event => {
@@ -37,7 +39,7 @@ const Dialogs = props => {
         <textarea
           preventDefault={true}
           className={classes.txtArea}
-          value={props.store.getState().dialogsPage.newMsgText}
+          value={props.state.dialogsPage.newMsgText}
           onChange={msgInputChange}
           onKeyDown={msgInputEnterSubmit}
         ></textarea>

@@ -2,14 +2,15 @@ import React from 'react';
 import classes from './Profile.module.css';
 import MyPosts from './MyPosts/MyPosts';
 import ProfileInfo from './ProfileInfo/ProfileInfo';
+import {addNewPostActionCreator,setNewPostTextActionCreator} from './../../Redux/store'
 const Profile = props => {
   let newPost = () => {
-    props.store.addPost();
+    props.dispatch(addNewPostActionCreator());
   };
 
   let postTextAreaChange = event => {
     let text = event.target.value;
-    props.store.setPostText(text);
+    props.dispatch(setNewPostTextActionCreator(text));
   };
 
   return (
@@ -21,14 +22,14 @@ const Profile = props => {
       <div>
         <textarea
           preventDefault={true}
-          value={props.store.getState().profilePage.newPostText}
+          value={props.state.profilePage.newPostText}
           onChange={postTextAreaChange}
         ></textarea>
       </div>
       <button>
         <button onClick={newPost}>New post</button>
       </button>
-      <MyPosts posts={props.store.getState().profilePage.posts} />
+      <MyPosts posts={props.state.profilePage.posts} />
     </button>
   );
 };

@@ -3,21 +3,15 @@ import store from './Redux/store';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
-
-let renderEntireTree = store => {
+import './index.css';
+let renderEntireTree = state => {
   ReactDOM.render(
-    <App
-      state={store.state}
-      addMessageCallback={store.addMessage}
-      msgTextChangeCallback={store.setMsgText}
-      addPost={store.addPost}
-      setPostText={store.setPostText}
-    />,
+    <App state={state} dispatch={store.dispatch.bind(store)} />,
     document.getElementById('root')
   );
 };
 
-renderEntireTree(store);
+renderEntireTree(store.getState());
 
 store.subscribe(renderEntireTree);
 
