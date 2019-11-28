@@ -7,7 +7,6 @@ import {
   setNewMessageTextActionCreator
 } from './../../Redux/Reducers/dialogsReducer';
 const Dialogs = props => {
-  debugger;
   let dialogButtons = props.state.dialogs.map(item => (
     <DialogButton
       id={item.id}
