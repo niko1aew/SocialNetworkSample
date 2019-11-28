@@ -8,14 +8,31 @@ import { Route, BrowserRouter } from 'react-router-dom';
 import './App.css';
 
 function App(props) {
+  debugger;
   return (
     <BrowserRouter>
       <div className="app-wrapper">
         <Header></Header>
         <Navbar></Navbar>
         <div className="app-wrapper-content">
-          <Route render={() => <Dialogs state={props.state} dispatch={props.dispatch} />} path="/dialogs" />
-          <Route render={() => <Profile state={props.state} dispatch={props.dispatch}  />} path="/profile" />
+          <Route
+            render={() => (
+              <Dialogs
+                state={props.state.dialogsPage}
+                dispatch={props.dispatch}
+              />
+            )}
+            path="/dialogs"
+          />
+          <Route
+            render={() => (
+              <Profile
+                state={props.state.profilePage}
+                dispatch={props.dispatch}
+              />
+            )}
+            path="/profile"
+          />
         </div>
       </div>
     </BrowserRouter>

@@ -2,10 +2,13 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogButton from './DialogButton/DialogButton';
 import Message from './Message/Message';
-import {addNewMessageActionCreator,setNewMessageTextActionCreator} from './../../Redux/Reducers/dialogsReducer'
+import {
+  addNewMessageActionCreator,
+  setNewMessageTextActionCreator
+} from './../../Redux/Reducers/dialogsReducer';
 const Dialogs = props => {
   debugger;
-  let dialogButtons = props.state.dialogsPage.dialogs.map(item => (
+  let dialogButtons = props.state.dialogs.map(item => (
     <DialogButton
       id={item.id}
       name={item.name}
@@ -13,7 +16,7 @@ const Dialogs = props => {
     />
   ));
 
-  let messages = props.state.dialogsPage.messages.map(item => (
+  let messages = props.state.messages.map(item => (
     <Message messageText={item.message} isAnswer={item.isAnswer} />
   ));
 
@@ -39,7 +42,7 @@ const Dialogs = props => {
         <textarea
           preventDefault={true}
           className={classes.txtArea}
-          value={props.state.dialogsPage.newMsgText}
+          value={props.state.newMsgText}
           onChange={msgInputChange}
           onKeyDown={msgInputEnterSubmit}
         ></textarea>
