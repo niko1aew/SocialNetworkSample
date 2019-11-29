@@ -7,7 +7,6 @@ import {
 
 const MyPostsContainer = props => {
   const profileState = props.store.getState().profilePage;
-  debugger;
   const setNewPostText = text => {
     let action = setNewPostTextActionCreator(text);
     props.store.dispatch(action);

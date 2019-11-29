@@ -2,12 +2,9 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogButton from './DialogButton/DialogButton';
 import Message from './Message/Message';
-import {
-  addNewMessageActionCreator,
-  setNewMessageTextActionCreator
-} from './../../Redux/Reducers/dialogsReducer';
+
 const Dialogs = props => {
-  let dialogButtons = props.state.dialogs.map(item => (
+  let dialogButtons = props.dialogs.map(item => (
     <DialogButton
       id={item.id}
       name={item.name}
@@ -15,22 +12,22 @@ const Dialogs = props => {
     />
   ));
 
-  let messages = props.state.messages.map(item => (
+  let messages = props.messages.map(item => (
     <Message messageText={item.message} isAnswer={item.isAnswer} />
   ));
 
   let sendMessage = () => {
-    props.dispatch(addNewMessageActionCreator());
+    props.sendMessage();
   };
 
   let msgInputChange = event => {
     let inputText = event.target.value;
-    props.dispatch(setNewMessageTextActionCreator(inputText));
+    props.messageChangeCallback(inputText);
   };
 
   let msgInputEnterSubmit = event => {
     if (event.key === 'Enter') {
-      sendMessage();
+      props.sendMessage();
     }
   };
   return (
@@ -41,7 +38,7 @@ const Dialogs = props => {
         <textarea
           preventDefault={true}
           className={classes.txtArea}
-          value={props.state.newMsgText}
+          value={props.newMessageText}
           onChange={msgInputChange}
           onKeyDown={msgInputEnterSubmit}
         ></textarea>

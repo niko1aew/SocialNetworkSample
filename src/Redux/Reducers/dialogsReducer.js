@@ -2,7 +2,7 @@ const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
 const SET_NEW_MESSAGE_TEXT = 'SET-NEW-MESSAGE-TEXT';
 
 let initialState = {
-  newMsgText: '',
+  newMessageText: '',
   dialogs: [
     { id: '1', name: 'Valera' },
     { id: '2', name: 'Andrey' },
@@ -25,17 +25,18 @@ let initialState = {
 };
 
 const dialogsReducer = (state = initialState, action) => {
+  debugger;
   if (action.type === ADD_NEW_MESSAGE) {
-    if (state.newMsgText && state.newMsgText.trim() !== '') {
+    if (state.newMessageText && state.newMessageText.trim() !== '') {
       state.messages.push({
         id: '30',
-        message: state.newMsgText,
+        message: state.newMessageText,
         isAnswer: true
       });
-      state.newMsgText = '';
+      state.newMessageText = '';
     }
   } else if (action.type === SET_NEW_MESSAGE_TEXT) {
-    state.newMsgText = action.text;
+    state.newMessageText = action.text;
   }
   return state;
 };
