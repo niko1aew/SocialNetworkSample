@@ -4,28 +4,32 @@ import {
   setNewMessageTextActionCreator
 } from './../../Redux/Reducers/dialogsReducer';
 import Dialogs from './Dialogs';
-const dialogsContainer = props => {
-  const dialogsState = props.store.getState().dialogsPage;
-
-  const sendMessage = () => {
-    let action = addNewMessageActionCreator();
-    props.store.dispatch(action);
-  };
-
-  const messageChangeCallback = text => {
-    debugger;
-    let action = setNewMessageTextActionCreator(text);
-    props.store.dispatch(action);
-  };
-
+import StoreContext from '../../storeContext';
+const dialogsContainer = () => {
   return (
-    <Dialogs
-      dialogs={dialogsState.dialogs}
-      messages={dialogsState.messages}
-      sendMessage={sendMessage}
-      newMessageText={dialogsState.newMessageText}
-      messageChangeCallback={messageChangeCallback}
-    />
+    <StoreContext.Consumer>
+      {store => {
+        const dialogsState = store.getState().dialogsPage;
+        const sendMessage = () => {
+          let action = addNewMessageActionCreator();
+          store.dispatch(action);
+        };
+
+        const messageChangeCallback = text => {
+          let action = setNewMessageTextActionCreator(text);
+          store.dispatch(action);
+        };
+        return (
+          <Dialogs
+            dialogs={dialogsState.dialogs}
+            messages={dialogsState.messages}
+            sendMessage={sendMessage}
+            newMessageText={dialogsState.newMessageText}
+            messageChangeCallback={messageChangeCallback}
+          />
+        );
+      }}
+    </StoreContext.Consumer>
   );
 };
 export default dialogsContainer;

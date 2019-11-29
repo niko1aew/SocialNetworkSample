@@ -25,7 +25,6 @@ let initialState = {
 };
 
 const dialogsReducer = (state = initialState, action) => {
-  debugger;
   if (action.type === ADD_NEW_MESSAGE) {
     if (state.newMessageText && state.newMessageText.trim() !== '') {
       state.messages.push({
