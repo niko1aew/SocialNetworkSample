@@ -1,3 +1,4 @@
+import cloneDeep from 'lodash/cloneDeep';
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
 const SET_NEW_MESSAGE_TEXT = 'SET-NEW-MESSAGE-TEXT';
 
@@ -25,19 +26,29 @@ let initialState = {
 };
 
 const dialogsReducer = (state = initialState, action) => {
-  if (action.type === ADD_NEW_MESSAGE) {
-    if (state.newMessageText && state.newMessageText.trim() !== '') {
-      state.messages.push({
-        id: '30',
-        message: state.newMessageText,
-        isAnswer: true
-      });
-      state.newMessageText = '';
+  switch (action.type) {
+    case ADD_NEW_MESSAGE: {
+      let stateCopy = cloneDeep(state);
+      if (stateCopy.newMessageText && stateCopy.newMessageText.trim() !== '') {
+        stateCopy.messages.push({
+          id: '30',
+          message: stateCopy.newMessageText,
+          isAnswer: true
+        });
+        stateCopy.newMessageText = '';
+        return stateCopy;
+      }
     }
-  } else if (action.type === SET_NEW_MESSAGE_TEXT) {
-    state.newMessageText = action.text;
+    case SET_NEW_MESSAGE_TEXT: {
+      //Здесь лучше копировать state не польностью, для экономии памяти
+      let stateCopy = cloneDeep(state);
+      stateCopy.newMessageText = action.text;
+      return stateCopy;
+    }
+
+    default:
+      return state;
   }
-  return state;
 };
 
 export const addNewMessageActionCreator = () => ({
