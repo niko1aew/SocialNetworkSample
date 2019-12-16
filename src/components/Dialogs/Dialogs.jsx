@@ -7,13 +7,17 @@ const Dialogs = props => {
   let dialogButtons = props.dialogs.map(item => (
     <DialogButton
       id={item.id}
+      key={item.id}
       name={item.name}
       image="https://h5p.org/sites/default/files/styles/medium-logo/public/logos/dialog_cards_icon-color.png?itok=P7YNwiZ9"
     />
   ));
-
   let messages = props.messages.map(item => (
-    <Message messageText={item.message} isAnswer={item.isAnswer} />
+    <Message
+      messageText={item.message}
+      isAnswer={item.isAnswer}
+      key={item.id}
+    />
   ));
 
   let sendMessage = () => {
