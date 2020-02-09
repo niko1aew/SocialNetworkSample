@@ -4,24 +4,24 @@ const SET_USERS = 'SET_USERS';
 
 let initialState = {
   users: [
-    {
-      id: 1,
-      photoUrl:
-        'https://microhealth.com/assets/images/illustrations/personal-user-illustration-@2x.png',
-      followed: true,
-      fullName: 'John',
-      status: 'Regular user status',
-      location: { city: 'New York', country: 'USA' }
-    },
-    {
-      id: 2,
-      photoUrl:
-        'https://i7.pngguru.com/preview/555/703/598/computer-icons-avatar-woman-user-avatar.jpg',
-      followed: false,
-      fullName: 'Jane',
-      status: 'I am Jane Doe',
-      location: { city: 'Detroit', country: 'USA' }
-    }
+    // {
+    //   id: 1,
+    //   photoUrl:
+    //     'https://microhealth.com/assets/images/illustrations/personal-user-illustration-@2x.png',
+    //   followed: true,
+    //   fullName: 'John',
+    //   status: 'Regular user status',
+    //   location: { city: 'New York', country: 'USA' }
+    // },
+    // {
+    //   id: 2,
+    //   photoUrl:
+    //     'https://i7.pngguru.com/preview/555/703/598/computer-icons-avatar-woman-user-avatar.jpg',
+    //   followed: false,
+    //   fullName: 'Jane',
+    //   status: 'I am Jane Doe',
+    //   location: { city: 'Detroit', country: 'USA' }
+    // }
   ]
 };
 
@@ -48,7 +48,8 @@ const usersReducer = (state = initialState, action) => {
         })
       };
     case SET_USERS:
-      return { ...state, users: [...state.users, action.users] };
+      debugger;
+      return { ...state, users: [...state.users, ...action.users] };
     default:
       return state;
   }

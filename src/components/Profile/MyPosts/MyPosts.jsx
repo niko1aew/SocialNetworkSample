@@ -12,12 +12,14 @@ const MyPosts = props => {
   };
   const posts = props.posts.map(item => (
     <Post
+      key={item.id}
       id={item.id}
       text={item.text}
       image={item.image}
       likesCount={item.likesCount}
     />
   ));
+  debugger;
 
   return (
     <div>
