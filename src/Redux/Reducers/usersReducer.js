@@ -1,28 +1,14 @@
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
+const SET_USERS_COUNT = 'SET_USERS_COUNT';
+const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 
 let initialState = {
-  users: [
-    // {
-    //   id: 1,
-    //   photoUrl:
-    //     'https://microhealth.com/assets/images/illustrations/personal-user-illustration-@2x.png',
-    //   followed: true,
-    //   fullName: 'John',
-    //   status: 'Regular user status',
-    //   location: { city: 'New York', country: 'USA' }
-    // },
-    // {
-    //   id: 2,
-    //   photoUrl:
-    //     'https://i7.pngguru.com/preview/555/703/598/computer-icons-avatar-woman-user-avatar.jpg',
-    //   followed: false,
-    //   fullName: 'Jane',
-    //   status: 'I am Jane Doe',
-    //   location: { city: 'Detroit', country: 'USA' }
-    // }
-  ]
+  users: [],
+  pageSize: 10,
+  totalUsersCount: 0,
+  currentPage: 1
 };
 
 const usersReducer = (state = initialState, action) => {
@@ -48,7 +34,11 @@ const usersReducer = (state = initialState, action) => {
         })
       };
     case SET_USERS:
-      return { ...state, users: [...state.users, ...action.users] };
+      return { ...state, users: [...action.users] };
+    case SET_USERS_COUNT:
+      return { ...state, totalUsersCount: action.usersCount };
+    case SET_CURRENT_PAGE:
+      return { ...state, currentPage: action.currentPage };
     default:
       return state;
   }
@@ -57,5 +47,13 @@ const usersReducer = (state = initialState, action) => {
 export const followAC = userId => ({ type: FOLLOW, userId });
 export const unfollowAC = userId => ({ type: UNFOLLOW, userId });
 export const setUsersAC = users => ({ type: SET_USERS, users });
+export const setUsersCountAC = usersCount => ({
+  type: SET_USERS_COUNT,
+  usersCount
+});
+export const setCurrentPageAC = currentPage => ({
+  type: SET_CURRENT_PAGE,
+  currentPage
+});
 
 export default usersReducer;
