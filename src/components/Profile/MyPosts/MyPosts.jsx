@@ -19,7 +19,6 @@ const MyPosts = props => {
       likesCount={item.likesCount}
     />
   ));
-  debugger;
 
   return (
     <div>

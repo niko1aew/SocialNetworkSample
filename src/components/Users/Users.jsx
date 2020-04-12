@@ -1,14 +1,13 @@
 import React from 'react';
-import Axios from 'axios';
 import classes from './Users.module.css';
 import userImage from '../../assets/img/user.png';
 
 
-const Users1 = (props) => {
+const Users = (props) => {
   let pagesCount = Math.ceil(
     props.totalUsersCount / props.pageSize
   );
-  debugger
+
   let pages = [];
 
   for (let i = 1; i <= pagesCount; i++) {
@@ -17,7 +16,6 @@ const Users1 = (props) => {
 
   return (
     <div>
-      test
       <div>
         {pages.map(p => {
           return (
@@ -27,9 +25,7 @@ const Users1 = (props) => {
                 p && classes.activePageNumber}`}
                 onClick={
                   () => {
-                    // this.changePage(p);
                     props.onPageChanged(p)
-                    // props.setCurrentPage(p);
                   }
                 }
             >
@@ -46,6 +42,7 @@ const Users1 = (props) => {
             <img
               className={classes.userPhoto}
               src={user.photos.small ? user.photos.small : userImage}
+              alt='UserPhoto'
             />
           </div>
           <div className="user-followed">
@@ -73,4 +70,4 @@ const Users1 = (props) => {
   );
 }
 
-export default Users1;
+export default Users;

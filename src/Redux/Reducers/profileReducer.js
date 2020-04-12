@@ -39,6 +39,7 @@ const profileReducer = (state = initialState, action) => {
           newPostText: ''
         };
       }
+      break;
     }
 
     case SET_NEW_POST_TEXT: {
