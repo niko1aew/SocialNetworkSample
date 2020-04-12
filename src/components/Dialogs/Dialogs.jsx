@@ -21,17 +21,17 @@ const Dialogs = props => {
   ));
 
   let sendMessage = () => {
-    props.sendMessage();
+    props.addNewMessage();
   };
 
   let msgInputChange = event => {
     let inputText = event.target.value;
-    props.messageChangeCallback(inputText);
+    props.setNewMessageText(inputText);
   };
 
   let msgInputEnterSubmit = event => {
     if (event.key === 'Enter') {
-      props.sendMessage();
+      props.addNewMessage();
     }
   };
   return (

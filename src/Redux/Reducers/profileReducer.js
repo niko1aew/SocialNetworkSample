@@ -38,8 +38,9 @@ const profileReducer = (state = initialState, action) => {
           ],
           newPostText: '',
         };
+      } else {
+        return state;
       }
-      break;
     }
 
     case SET_NEW_POST_TEXT: {
@@ -51,11 +52,11 @@ const profileReducer = (state = initialState, action) => {
   }
 };
 
-export const addNewPostActionCreator = () => ({
+export const addNewPost = () => ({
   type: ADD_NEW_POST,
 });
 
-export const setNewPostTextActionCreator = (text) => ({
+export const setNewPostText = (text) => ({
   type: SET_NEW_POST_TEXT,
   text,
 });
