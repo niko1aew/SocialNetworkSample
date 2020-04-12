@@ -10,16 +10,16 @@ let initialState = {
       text: 'Post 2',
       likesCount: 5,
       image:
-        'https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg'
+        'https://images.vexels.com/media/users/3/145908/preview2/52eabf633ca6414e60a7677b0b917d92-male-avatar-maker.jpg',
     },
     {
       id: '3',
       text: 'Post 3',
       likesCount: 0,
-      image: 'https://www.w3schools.com/w3images/avatar6.png'
+      image: 'https://www.w3schools.com/w3images/avatar6.png',
     },
-    { id: '4', text: 'Post 4', likesCount: 9, image: '' }
-  ]
+    { id: '4', text: 'Post 4', likesCount: 9, image: '' },
+  ],
 };
 
 const profileReducer = (state = initialState, action) => {
@@ -33,10 +33,10 @@ const profileReducer = (state = initialState, action) => {
             {
               id: '30',
               text: state.newPostText,
-              likesCount: 0
-            }
+              likesCount: 0,
+            },
           ],
-          newPostText: ''
+          newPostText: '',
         };
       }
       break;
@@ -52,12 +52,12 @@ const profileReducer = (state = initialState, action) => {
 };
 
 export const addNewPostActionCreator = () => ({
-  type: ADD_NEW_POST
+  type: ADD_NEW_POST,
 });
 
-export const setNewPostTextActionCreator = text => ({
+export const setNewPostTextActionCreator = (text) => ({
   type: SET_NEW_POST_TEXT,
-  text
+  text,
 });
 
 export default profileReducer;
