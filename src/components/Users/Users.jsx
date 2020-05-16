@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Users.module.css';
 import userImage from '../../assets/img/user.png';
 import Preloader from '../Shared/Preloader/Preloader';
+import { NavLink } from 'react-router-dom';
 
 const Users = (props) => {
   let pagesCount = Math.ceil(props.totalUsersCount / props.pageSize);
@@ -37,11 +38,13 @@ const Users = (props) => {
           <div className="user-name">{user.name}</div>
           <div className="user-status">{user.status}</div>
           <div>
-            <img
-              className={classes.userPhoto}
-              src={user.photos.small ? user.photos.small : userImage}
-              alt="UserPhoto"
-            />
+            <NavLink to={'/profile/' + user.id}>
+              <img
+                className={classes.userPhoto}
+                src={user.photos.small ? user.photos.small : userImage}
+                alt="UserPhoto"
+              />
+            </NavLink>
           </div>
           <div className="user-followed">
             {user.followed ? (
