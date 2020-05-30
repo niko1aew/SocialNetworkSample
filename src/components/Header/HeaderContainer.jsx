@@ -24,7 +24,6 @@ class HeaderContainer extends React.Component {
 
   render() {
     let authData = this.props.authData;
-    debugger;
     return (
       <Header
         {...this.props}
@@ -39,7 +38,6 @@ class HeaderContainer extends React.Component {
 }
 
 let mapStateToProps = (state) => {
-    debugger
   return {
     isAuth: state.auth.isAuth,
     authData: { userId: state.auth.userId, email: state.auth.email, login: state.auth.login }

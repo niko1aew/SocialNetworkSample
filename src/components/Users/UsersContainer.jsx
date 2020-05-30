@@ -36,7 +36,8 @@ class UsersContainer extends React.Component {
   fetchUsers(pageSize, currentPage) {
     this.props.toggleIsFetching(true);
     return Axios.get(
-      `https://social-network.samuraijs.com/api/1.0/users?count=${pageSize}&page=${currentPage}`
+      `https://social-network.samuraijs.com/api/1.0/users?count=${pageSize}&page=${currentPage}`,
+      { withCredentials: true }
     ).then((response) => {
       this.props.toggleIsFetching(false);
       return response.data;
