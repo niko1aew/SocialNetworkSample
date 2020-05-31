@@ -1,5 +1,5 @@
 import React from 'react';
-import * as Axios from 'axios';
+import { usersApi } from '../../api/api';
 import { connect } from 'react-redux';
 import Users from './Users';
 import {
@@ -35,12 +35,9 @@ class UsersContainer extends React.Component {
 
   fetchUsers(pageSize, currentPage) {
     this.props.toggleIsFetching(true);
-    return Axios.get(
-      `https://social-network.samuraijs.com/api/1.0/users?count=${pageSize}&page=${currentPage}`,
-      { withCredentials: true }
-    ).then((response) => {
+    return usersApi.getUsers(pageSize, currentPage).then((data) => {
       this.props.toggleIsFetching(false);
-      return response.data;
+      return data;
     });
   }
 
