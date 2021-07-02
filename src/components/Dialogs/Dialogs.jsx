@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogButton from './DialogButton/DialogButton';
 import Message from './Message/Message';
+import { Redirect } from 'react-router-dom';
 
 const Dialogs = props => {
   let dialogButtons = props.dialogs.map(item => (
@@ -12,6 +13,7 @@ const Dialogs = props => {
       image="https://h5p.org/sites/default/files/styles/medium-logo/public/logos/dialog_cards_icon-color.png?itok=P7YNwiZ9"
     />
   ));
+
   let messages = props.messages.map(item => (
     <Message
       messageText={item.message}
@@ -34,6 +36,11 @@ const Dialogs = props => {
       props.addNewMessage();
     }
   };
+
+  if (!props.isAuth) {
+    return <Redirect to={"/login"}/>
+  }
+
   return (
     <div className={classes.dialogs}>
       <div className={classes.dialogsItems}>{dialogButtons}</div>

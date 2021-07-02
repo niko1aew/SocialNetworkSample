@@ -7,10 +7,12 @@ import Dialogs from './Dialogs';
 
 const mapStateToProps = state => {
   const dialogsState = state.dialogsPage;
+  const authState = state.auth;
   return {
     dialogs: dialogsState.dialogs,
     messages: dialogsState.messages,
-    newMessageText: dialogsState.newMessageText
+    newMessageText: dialogsState.newMessageText,
+    isAuth: authState.isAuth
   };
 };
 
