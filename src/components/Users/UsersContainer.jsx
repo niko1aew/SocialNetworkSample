@@ -2,9 +2,8 @@ import React from 'react';
 import { connect } from 'react-redux';
 import Users from './Users';
 import {
-  followUser,
-  unfollowUser,
-  toggleIsFollowingProgress,
+  followThunkCreator,
+  unfollowThunkCreator,
   getUsersThunkCreator
 } from '../../Redux/Reducers/usersReducer';
 
@@ -48,8 +47,7 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  toggleIsFollowingProgress,
-  followUser,
-  unfollowUser,
+  followUser: followThunkCreator,
+  unfollowUser: unfollowThunkCreator,
   getUsers: getUsersThunkCreator
 })(UsersContainer);

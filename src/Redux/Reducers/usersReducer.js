@@ -98,4 +98,30 @@ export const getUsersThunkCreator = (currentPage, pageSize) => {
   }
 }
 
+export const unfollowThunkCreator = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleIsFollowingProgress(userId, true));
+
+    usersApi.unfollowUser(userId).then((data) => {
+      dispatch(toggleIsFollowingProgress(userId, false));
+      if (data.resultCode === 0) {
+        dispatch(unfollowUser(userId));
+      }
+    });
+  }
+}
+
+export const followThunkCreator = (userId) => {
+  return (dispatch) => {
+    dispatch(toggleIsFollowingProgress(userId, true));
+
+    usersApi.followUser(userId).then((data) => {
+      dispatch(toggleIsFollowingProgress(userId, false));
+      if (data.resultCode === 0) {
+        dispatch(followUser(userId));
+      }
+    });
+  }
+}
+
 export default usersReducer;
