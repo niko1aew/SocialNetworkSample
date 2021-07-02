@@ -1,6 +1,6 @@
 const SET_USER_DATA = 'SET_USER_DATA';
 
-let initialState = {
+export let initialState = {
   userId: null,
   email: null,
   login: null,

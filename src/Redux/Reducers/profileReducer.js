@@ -2,7 +2,7 @@ const ADD_NEW_POST = 'ADD-NEW-POST';
 const SET_NEW_POST_TEXT = 'SET-NEW-POST-TEXT';
 const SET_USER_PROFILE = 'SET-USER-PROFILE';
 
-let initialState = {
+export let initialState = {
   newPostText: '',
   posts: [
     { id: '1', text: 'Post 1', likesCount: 12, image: '' },

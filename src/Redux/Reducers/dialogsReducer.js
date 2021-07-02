@@ -1,7 +1,7 @@
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
 const SET_NEW_MESSAGE_TEXT = 'SET-NEW-MESSAGE-TEXT';
 
-let initialState = {
+export let initialState = {
   newMessageText: '',
   dialogs: [
     { id: '1', name: 'Valera' },

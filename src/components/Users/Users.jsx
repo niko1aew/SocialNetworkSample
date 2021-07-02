@@ -68,7 +68,6 @@ const Users = (props) => {
               ) : (
                 <button disabled={props.isFollowingProgress.some(x => x === user.id)}
                   onClick={() => {
-                    debugger
                     props.toggleIsFollowingProgress(user.id, true);
                     return usersApi.followUser(user.id).then((data) => {
                       props.toggleIsFollowingProgress(user.id, false);
