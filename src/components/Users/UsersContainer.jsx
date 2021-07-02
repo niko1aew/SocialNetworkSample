@@ -1,53 +1,24 @@
 import React from 'react';
-import { usersApi } from '../../api/api';
 import { connect } from 'react-redux';
 import Users from './Users';
 import {
-  setUsers,
   followUser,
   unfollowUser,
-  setUsersCount,
-  setCurrentPage,
-  toggleIsFetching,
   toggleIsFollowingProgress,
+  getUsersThunkCreator
 } from '../../Redux/Reducers/usersReducer';
 
 class UsersContainer extends React.Component {
   componentDidMount() {
-    this.setUsers();
+    this.props.getUsers(this.props.currentPage, this.props.pageSize);
   }
 
   changePage(pageNumber) {
-    this.setUsers(pageNumber);
-  }
-
-  setUsers(pageNumber) {
-    this.fetchUsers(
-      this.props.pageSize,
-      pageNumber || this.props.currentPage
-    ).then((data) => {
-      this.props.setUsers(data.items);
-      this.props.setUsersCount(data.totalCount);
-      if (pageNumber) {
-        this.props.setCurrentPage(pageNumber);
-      }
-    });
-  }
-
-  fetchUsers(pageSize, currentPage) {
-    this.props.toggleIsFetching(true);
-    return usersApi.getUsers(pageSize, currentPage).then((data) => {
-      this.props.toggleIsFetching(false);
-      return data;
-    });
+    this.props.getUsers(pageNumber, this.props.pageSize);
   }
 
   render() {
     return (
-      <>
-        {/* {this.props.isFetching ? (
-          <img src={loadingSpinner} alt="Loading..." />
-        ) : ( */}
         <Users
           totalUsersCount={this.props.totalUsersCount}
           pageSize={this.props.pageSize}
@@ -60,12 +31,11 @@ class UsersContainer extends React.Component {
           toggleIsFollowingProgress={this.props.toggleIsFollowingProgress}
           isFollowingProgress={this.props.isFollowingProgress}
         ></Users>
-        {/* )} */}
-      </>
     );
   }
 }
 
+// Все что ниже формирует пропсы
 const mapStateToProps = (state) => {
   return {
     users: state.usersPage.users,
@@ -78,11 +48,8 @@ const mapStateToProps = (state) => {
 };
 
 export default connect(mapStateToProps, {
-  setUsers,
-  setUsersCount,
   toggleIsFollowingProgress,
   followUser,
   unfollowUser,
-  setCurrentPage,
-  toggleIsFetching,
+  getUsers: getUsersThunkCreator
 })(UsersContainer);

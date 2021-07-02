@@ -1,3 +1,5 @@
+import { usersApi } from '../../api/api';
+
 const FOLLOW = 'FOLLOW';
 const UNFOLLOW = 'UNFOLLOW';
 const SET_USERS = 'SET_USERS';
@@ -6,7 +8,7 @@ const SET_CURRENT_PAGE = 'SET_CURRENT_PAGE';
 const TOGGLE_IS_FETCHING = 'TOGGLE_IS_FETCHING';
 const TOGGLE_IS_FOLLOWING_PROGRESS = 'TOGGLE_IS_FOLLOWING_PROGRESS';
 
-let initialState = {
+export let initialState = {
   users: [],
   pageSize: 10,
   totalUsersCount: 0,
@@ -46,7 +48,6 @@ const usersReducer = (state = initialState, action) => {
     case TOGGLE_IS_FETCHING:
       return { ...state, isFetching: action.isFetching };
     case TOGGLE_IS_FOLLOWING_PROGRESS:
-      debugger
       return {
         ...state,
         isFollowingProgress: action.isFollowing
@@ -59,6 +60,7 @@ const usersReducer = (state = initialState, action) => {
   }
 };
 
+// Action creators
 export const toggleIsFetching = (isFetching) => ({
   type: TOGGLE_IS_FETCHING,
   isFetching,
@@ -79,5 +81,21 @@ export const setCurrentPage = (currentPage) => ({
   type: SET_CURRENT_PAGE,
   currentPage,
 });
+
+// Thunks
+export const getUsersThunkCreator = (currentPage, pageSize) => {
+  // Возвращаем Thunk
+  return (dispatch) => {
+    // функция toggleIsFetching вернет action, который мы задиспатчим
+    dispatch(toggleIsFetching(true));
+    
+    usersApi.getUsers(pageSize, currentPage).then((data) => {
+        dispatch(toggleIsFetching(false));
+        dispatch(setUsers(data.items));
+        dispatch(setCurrentPage(currentPage));
+        dispatch(setUsersCount(data.totalCount));
+      });
+  }
+}
 
 export default usersReducer;
