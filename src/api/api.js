@@ -32,7 +32,7 @@ export const usersApi = {
 };
 
 export const authApi = {
-    isLoggedIn() {
+    me() {
         return samuraijsApi
         .get('auth/me')
         .then((response) => response.data)
