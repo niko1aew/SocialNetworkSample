@@ -2,7 +2,6 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogButton from './DialogButton/DialogButton';
 import Message from './Message/Message';
-import { Redirect } from 'react-router-dom';
 
 const Dialogs = props => {
   let dialogButtons = props.dialogs.map(item => (
@@ -36,10 +35,6 @@ const Dialogs = props => {
       props.addNewMessage();
     }
   };
-
-  if (!props.isAuth) {
-    return <Redirect to={"/login"}/>
-  }
 
   return (
     <div className={classes.dialogs}>
