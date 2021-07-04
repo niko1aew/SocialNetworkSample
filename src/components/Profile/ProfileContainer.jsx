@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import { getProfileThunkCreator } from '../../Redux/Reducers/profileReducer';
 import { withRouter } from 'react-router-dom';
 import { withAuthRedirect } from '../HOC/withAuthRedirect';
+import { compose } from 'redux';
 
 class ProfileContainer extends React.Component {
   componentDidMount() {
@@ -24,9 +25,9 @@ let mapStateToProps = (state) => ({
   profile: state.profilePage.profile
 });
 
-let withRouterProfileContainer = withRouter(ProfileContainer);
-let withAuthRedirectProfileContainer = withAuthRedirect(withRouterProfileContainer);
-
-export default connect(mapStateToProps, { getProfile: getProfileThunkCreator })(
-  withAuthRedirectProfileContainer
-);
+// С помощью HOC функций создаем слои вокруг компоненты
+export default compose(
+  withRouter,
+  withAuthRedirect,
+  connect(mapStateToProps, { getProfile: getProfileThunkCreator })
+)(ProfileContainer)

@@ -6,6 +6,8 @@ import {
   unfollowThunkCreator,
   getUsersThunkCreator
 } from '../../Redux/Reducers/usersReducer';
+import { withAuthRedirect } from '../HOC/withAuthRedirect';
+import { compose } from 'redux';
 
 class UsersContainer extends React.Component {
   componentDidMount() {
@@ -46,8 +48,11 @@ const mapStateToProps = (state) => {
   };
 };
 
-export default connect(mapStateToProps, {
-  followUser: followThunkCreator,
-  unfollowUser: unfollowThunkCreator,
-  getUsers: getUsersThunkCreator
-})(UsersContainer);
+export default compose(
+  connect(mapStateToProps, {
+    followUser: followThunkCreator,
+    unfollowUser: unfollowThunkCreator,
+    getUsers: getUsersThunkCreator
+  }),
+  withAuthRedirect
+)(UsersContainer);
