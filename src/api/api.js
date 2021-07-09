@@ -25,9 +25,26 @@ export const usersApi = {
       .then((response) => response.data);
   },
   getProfile(userId) {
-      return samuraijsApi
+    console.warn('Obsolete method. Please use profileApi object')
+    return profileApi.getProfile(userId);
+  }
+};
+
+export const profileApi = {
+  getProfile(userId) {
+    return samuraijsApi
       .get(`profile/${userId}`)
       .then((response) => response.data);
+  },
+  getStatus(userId) {
+    return samuraijsApi
+      .get(`profile/status/` + userId)
+      .then((response) => response.data)
+  },
+  updateStatus(status) {
+    return samuraijsApi.put(`profile/status`, {
+      status
+    })
   }
 };
 
@@ -37,4 +54,4 @@ export const authApi = {
         .get('auth/me')
         .then((response) => response.data)
     }
-}
+};
