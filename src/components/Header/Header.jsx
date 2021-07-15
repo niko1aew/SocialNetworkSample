@@ -4,13 +4,17 @@ import reactLogo from '../../assets/img/react.svg';
 import { NavLink } from 'react-router-dom';
 
 const Header = (props) => {
-  console.log('Header props:', props);
+
+  let onLogoutClick = () => {
+    props.logout();
+  };
+
   return (
     <header className={classes.header}>
       <img src={reactLogo} alt="logo"></img>
       <div className={classes.loginBlock}>
         {props.isAuth ? (
-          props.authData.login
+          <div>{props.authData.login} <button onClick={onLogoutClick}>Logout</button></div>
         ) : (
           <NavLink to={'/login'}>Login</NavLink>
         )}

@@ -1,8 +1,6 @@
 const ADD_NEW_MESSAGE = 'ADD-NEW-MESSAGE';
-const SET_NEW_MESSAGE_TEXT = 'SET-NEW-MESSAGE-TEXT';
 
 export let initialState = {
-  newMessageText: '',
   dialogs: [
     { id: '1', name: 'Valera' },
     { id: '2', name: 'Andrey' },
@@ -27,23 +25,19 @@ export let initialState = {
 const dialogsReducer = (state = initialState, action) => {
   switch (action.type) {
     case ADD_NEW_MESSAGE: {
-      if (state.newMessageText && state.newMessageText.trim() !== '') {
+      if (action.newMessageText && action.newMessageText.trim() !== '') {
         return {
           ...state,
           messages: [
             ...state.messages,
             {
               id: '30',
-              message: state.newMessageText,
+              message: action.newMessageText,
               isAnswer: true,
             },
-          ],
-          newMessageText: '',
+          ]
         };
       } else return state;
-    }
-    case SET_NEW_MESSAGE_TEXT: {
-      return { ...state, newMessageText: action.text };
     }
 
     default:
@@ -51,12 +45,9 @@ const dialogsReducer = (state = initialState, action) => {
   }
 };
 
-export const addNewMessage = () => ({
+export const addNewMessage = (newMessageText) => ({
   type: ADD_NEW_MESSAGE,
-});
-export const setNewMessageText = (text) => ({
-  type: SET_NEW_MESSAGE_TEXT,
-  text,
+  newMessageText
 });
 
 export default dialogsReducer;

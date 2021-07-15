@@ -2,6 +2,7 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogButton from './DialogButton/DialogButton';
 import Message from './Message/Message';
+import { reduxForm, Field } from 'redux-form';
 
 const Dialogs = props => {
   let dialogButtons = props.dialogs.map(item => (
@@ -13,6 +14,27 @@ const Dialogs = props => {
     />
   ));
 
+  const AddMessageForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field className={classes.txtArea} component={"textarea"} placeholder={"New message"} name={"newMessageText"}/>
+            </div>
+            <div>
+                <button className={classes.btnAddPost}>Send</button>
+            </div>
+        </form>
+    )
+  }
+
+  const onSubmit = (formData) => {
+    props.addNewMessage(formData.newMessageText);
+  }
+
+  const AddMessageReduxForm = reduxForm({
+    form: 'AddMessageForm'
+  })(AddMessageForm)
+
   let messages = props.messages.map(item => (
     <Message
       messageText={item.message}
@@ -21,36 +43,12 @@ const Dialogs = props => {
     />
   ));
 
-  let sendMessage = () => {
-    props.addNewMessage();
-  };
-
-  let msgInputChange = event => {
-    let inputText = event.target.value;
-    props.setNewMessageText(inputText);
-  };
-
-  let msgInputEnterSubmit = event => {
-    if (event.key === 'Enter') {
-      props.addNewMessage();
-    }
-  };
-
   return (
     <div className={classes.dialogs}>
       <div className={classes.dialogsItems}>{dialogButtons}</div>
       <div className={classes.messages}>{messages}</div>
       <div className={classes.msgInput}>
-        <textarea
-          preventDefault={true}
-          className={classes.txtArea}
-          value={props.newMessageText}
-          onChange={msgInputChange}
-          onKeyDown={msgInputEnterSubmit}
-        ></textarea>
-        <button className={classes.btnAddPost} onClick={sendMessage}>
-          Send
-        </button>
+        <AddMessageReduxForm onSubmit={onSubmit}/>
       </div>
     </div>
   );

@@ -51,7 +51,17 @@ export const profileApi = {
 export const authApi = {
     me() {
         return samuraijsApi
-        .get('auth/me')
-        .then((response) => response.data)
+          .get('auth/me')
+          .then((response) => response.data)
+    },
+    login(email, password, remebmerMe, captcha) {
+      return samuraijsApi
+        .post('auth/login', { email, password, remebmerMe })
+        .then((response) => response.data);
+    },
+    logout() {
+      return samuraijsApi
+        .post('auth/logout', {})
+        .then((response) => response.data);
     }
 };

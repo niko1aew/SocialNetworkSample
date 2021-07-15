@@ -1,15 +1,30 @@
 import React from 'react';
 import Post from './Post/Post';
+import { reduxForm, Field } from 'redux-form';
 
 const MyPosts = props => {
-  let onNewPostClick = () => {
-    props.addNewPost();
-  };
 
-  let onPostChange = event => {
-    let text = event.target.value;
-    props.setNewPostText(text);
-  };
+  const AddNewPostForm = (props) => {
+    return (
+        <form onSubmit={props.handleSubmit}>
+            <div>
+                <Field component={"textarea"} placeholder={"New post"} name={"newPostText"}/>
+            </div>
+            <div>
+                <button>Add post</button>
+            </div>
+        </form>
+    )
+  }
+
+  const onSubmit = (formData) => {
+    props.addNewPost(formData.newPostText);
+  }
+
+  const PostReduxForm = reduxForm({
+    form: 'AddNewPostForm'
+  })(AddNewPostForm)
+  
   const posts = props.posts.map(item => (
     <Post
       key={item.id}
@@ -23,14 +38,8 @@ const MyPosts = props => {
   return (
     <div>
       <div>
-        <textarea
-          preventDefault={true}
-          value={props.newPostText}
-          onChange={onPostChange}
-        ></textarea>
+        <PostReduxForm onSubmit={onSubmit}/>
       </div>
-      <button onClick={onNewPostClick}>New post</button>
-
       <div className="posts">
         My posts:
         {posts}
