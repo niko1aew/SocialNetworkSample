@@ -3,18 +3,20 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { loginThunkCreator } from '../../Redux/Reducers/authReducer';
 import { Redirect } from 'react-router-dom';
+import { Input } from '../Shared/Preloader/FormsControls/FormControls';
+import { required } from '../../utils/validators/validators';
 
 const LoginForm = (props) => {
     return (
         <form onSubmit={props.handleSubmit}>
             <div>
-                <Field placeholder={"Login"} name={"login"} component={"input"}/>
+                <Field placeholder={"Login"} name={"login"} component={Input} validate={[required]}/>
             </div>
             <div>
-                <Field placeholder={"Password"} name={"password"} component={"input"}/>
+                <Field placeholder={"Password"} name={"password"} component={Input} validate={[required]}/>
             </div>
             <div>
-                <Field type={"checkbox"} component={"input"} name={"rememberMe"}/> remember me
+                <Field type={"checkbox"} component={Input} name={"rememberMe"}/> remember me
             </div>
             <div>
                 <button>Login</button>
