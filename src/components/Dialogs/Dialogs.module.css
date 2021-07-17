@@ -17,18 +17,6 @@
   /* max-width: 300px; */
 }
 
-.txtArea {
-  background-color: beige;
-}
-
-.btnAddPost{
-  margin-top:3px;
-  border-radius: 5px;
-  background: lightblue;
-  /* box-shadow: none; */
-  border: 1;
-}
-
 .msgInput {
   padding: 3px;
   max-width: 300px;

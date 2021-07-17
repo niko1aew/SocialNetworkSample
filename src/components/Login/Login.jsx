@@ -3,7 +3,7 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { loginThunkCreator } from '../../Redux/Reducers/authReducer';
 import { Redirect } from 'react-router-dom';
-import { Input } from '../Shared/Preloader/FormsControls/FormControls';
+import { Input } from '../Shared/FormsControls/FormControls';
 import { required } from '../../utils/validators/validators';
 
 const LoginForm = (props) => {

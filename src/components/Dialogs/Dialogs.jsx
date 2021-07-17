@@ -2,11 +2,7 @@ import React from 'react';
 import classes from './Dialogs.module.css';
 import DialogButton from './DialogButton/DialogButton';
 import Message from './Message/Message';
-import { reduxForm, Field } from 'redux-form';
-import { Textarea } from '../Shared/Preloader/FormsControls/FormControls';
-import { required, maxLengthCreator } from '../../utils/validators/validators'
-
-const maxLength30 = maxLengthCreator(30);
+import AddNewMessageReduxForm from './Forms/AddNewMessageReduxForm';
 
 const Dialogs = props => {
   let dialogButtons = props.dialogs.map(item => (
@@ -18,32 +14,9 @@ const Dialogs = props => {
     />
   ));
 
-  const AddMessageForm = (props) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field
-                  className={classes.txtArea}
-                  component={Textarea}
-                  placeholder={"New message"}
-                  name={"newMessageText"}
-                  validate={[required, maxLength30]}
-                />
-            </div>
-            <div>
-                <button className={classes.btnAddPost}>Send</button>
-            </div>
-        </form>
-    )
-  }
-
   const onSubmit = (formData) => {
     props.addNewMessage(formData.newMessageText);
   }
-
-  const AddMessageReduxForm = reduxForm({
-    form: 'AddMessageForm'
-  })(AddMessageForm)
 
   let messages = props.messages.map(item => (
     <Message
@@ -58,7 +31,7 @@ const Dialogs = props => {
       <div className={classes.dialogsItems}>{dialogButtons}</div>
       <div className={classes.messages}>{messages}</div>
       <div className={classes.msgInput}>
-        <AddMessageReduxForm onSubmit={onSubmit}/>
+        <AddNewMessageReduxForm onSubmit={onSubmit}/>
       </div>
     </div>
   );
