@@ -1,33 +1,9 @@
 import React from 'react';
-import { reduxForm, Field } from 'redux-form';
+
 import { connect } from 'react-redux';
 import { loginThunkCreator } from '../../Redux/Reducers/authReducer';
 import { Redirect } from 'react-router-dom';
-import { Input } from '../Shared/FormsControls/FormControls';
-import { required } from '../../utils/validators/validators';
-
-const LoginForm = (props) => {
-    return (
-        <form onSubmit={props.handleSubmit}>
-            <div>
-                <Field placeholder={"Login"} name={"login"} component={Input} validate={[required]}/>
-            </div>
-            <div>
-                <Field placeholder={"Password"} name={"password"} component={Input} validate={[required]}/>
-            </div>
-            <div>
-                <Field type={"checkbox"} component={Input} name={"rememberMe"}/> remember me
-            </div>
-            <div>
-                <button>Login</button>
-            </div>
-        </form>
-    )
-}
-
-const LoginReduxForm = reduxForm({
-    form: 'login'
-})(LoginForm)
+import LoginReduxForm from './Forms/LoginReduxForm';
 
 const Login = (props) => {
     if (props.isAuth) {
