@@ -8,8 +8,8 @@ import { compose } from 'redux';
 class ProfileContainer extends React.Component {
   componentDidMount() {
     let userId = this.props.match.params.userId;
-    if (!userId) {
-      userId = 8146;
+    if (this.props.isAuth && !userId) {
+      userId = this.props.authorizedUserId;
     }
     
     this.props.getProfile(userId);
@@ -23,7 +23,9 @@ class ProfileContainer extends React.Component {
 
 let mapStateToProps = (state) => ({
   profile: state.profilePage.profile,
-  status: state.profilePage.status
+  status: state.profilePage.status,
+  authorizedUserId: state.auth.userId,
+  isAuth: state.auth.isAuth
 });
 
 // С помощью HOC функций создаем слои вокруг компоненты
