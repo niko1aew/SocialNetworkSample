@@ -53,6 +53,5 @@ export default compose(
     followUser: followThunkCreator,
     unfollowUser: unfollowThunkCreator,
     getUsers: getUsersThunkCreator
-  }),
-  withAuthRedirect
+  })
 )(UsersContainer);

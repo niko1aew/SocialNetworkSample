@@ -7,6 +7,10 @@ class ProfileStatus extends React.Component  {
     }
 
     activateEditMode = () => {
+        if (this.props.readOnly === true)
+        {
+            return;
+        }
         this.setState({
             editMode: true
         });
